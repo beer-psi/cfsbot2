@@ -150,7 +150,7 @@ pub async fn handle_command(
                         confession.created_at.naive_utc(),
                         FixedOffset::east_opt(7 * 3600).expect("can make fixed offset UTC+7")
                     )
-                    .format("%d/%m/%Y %H:%M:%S"),
+                    .format("%H:%M:%S %d/%m/%Y"),
                     confession.content
                 );
             }
