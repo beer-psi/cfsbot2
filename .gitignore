@@ -1,0 +1,7 @@
+/target
+.env
+.env.*
+!.env.example
+
+*.sqlite3
+*.sqlite3-*

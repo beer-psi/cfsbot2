@@ -1,0 +1,19 @@
+[package]
+name = "cfsbot2"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+axum = { version = "0.8.8", features = ["macros", "tokio"] }
+chrono = "0.4.43"
+clap = { version = "4.5.59", features = ["derive"] }
+dotenvy = "0.15.7"
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.149"
+serenity = { version = "0.12.5", features = ["interactions_endpoint"] }
+sqlx = { version = "0.8.6", features = ["runtime-tokio", "sqlite", "chrono"] }
+thiserror = "2.0.18"
+tokio = { version = "1.49.0", features = ["full"] }
+tower-http = { version = "0.6.8", features = ["trace"] }
+tracing = "0.1.44"
+tracing-subscriber = { version = "0.3.22", features = ["ansi", "env-filter"] }

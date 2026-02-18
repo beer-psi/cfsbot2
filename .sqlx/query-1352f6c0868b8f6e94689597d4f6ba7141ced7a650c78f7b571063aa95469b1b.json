@@ -1,0 +1,56 @@
+{
+  "db_name": "SQLite",
+  "query": "SELECT\n                    id,\n                    message_id,\n                    reviewer_id,\n                    content,\n                    status \"status: _\",\n                    rejected_reason,\n                    created_at \"created_at: _\"\n                FROM confessions WHERE status = 'Approved'\n                ORDER BY id\n                LIMIT ?",
+  "describe": {
+    "columns": [
+      {
+        "name": "id",
+        "ordinal": 0,
+        "type_info": "Integer"
+      },
+      {
+        "name": "message_id",
+        "ordinal": 1,
+        "type_info": "Integer"
+      },
+      {
+        "name": "reviewer_id",
+        "ordinal": 2,
+        "type_info": "Integer"
+      },
+      {
+        "name": "content",
+        "ordinal": 3,
+        "type_info": "Text"
+      },
+      {
+        "name": "status: _",
+        "ordinal": 4,
+        "type_info": "Text"
+      },
+      {
+        "name": "rejected_reason",
+        "ordinal": 5,
+        "type_info": "Text"
+      },
+      {
+        "name": "created_at: _",
+        "ordinal": 6,
+        "type_info": "Datetime"
+      }
+    ],
+    "parameters": {
+      "Right": 1
+    },
+    "nullable": [
+      false,
+      true,
+      true,
+      false,
+      false,
+      true,
+      false
+    ]
+  },
+  "hash": "1352f6c0868b8f6e94689597d4f6ba7141ced7a650c78f7b571063aa95469b1b"
+}

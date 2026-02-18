@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "UPDATE confessions SET status = ?, reviewer_id = ? WHERE id = ?",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 3
+    },
+    "nullable": []
+  },
+  "hash": "f8d2dd633e820017f6b91737c323b6884c35348829de323a3f360a72c1dcb6a5"
+}

@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "UPDATE confessions SET content = ?, status = 'Pending', rejected_reason = NULL, created_at = ? WHERE id = ?",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 3
+    },
+    "nullable": []
+  },
+  "hash": "b061518f628eefbcb285f89be9dfec80265dac516ca5fe6329f6bafc4a07ae97"
+}
