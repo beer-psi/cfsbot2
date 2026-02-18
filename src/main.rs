@@ -58,9 +58,18 @@ async fn main() {
     // not have control over the system or have a shell
     #[cfg(not(debug_assertions))]
     {
+        use sqlx::migrate::MigrationType;
+
         let migrator = sqlx::migrate!();
 
-        info!("applying {} migrations", migrator.iter().len());
+        info!(
+            "applying {} migrations",
+            migrator
+                .iter()
+                .filter(|m| m.migration_type == MigrationType::Simple
+                    || m.migration_type == MigrationType::ReversibleUp)
+                .count()
+        );
 
         migrator
             .run(&app_state.pool)
@@ -73,11 +82,15 @@ async fn main() {
             let commands = vec![
                 CreateCommand::new("confessions")
                     .description("Tạo bài đăng từ các confession đã duyệt")
-                    .add_option(CreateCommandOption::new(
-                        CommandOptionType::Integer,
-                        "limit",
-                        "số lượng confession trong bài đăng",
-                    )),
+                    .add_option(
+                        CreateCommandOption::new(
+                            CommandOptionType::Integer,
+                            "limit",
+                            "số lượng confession trong bài đăng",
+                        )
+                        .min_int_value(1)
+                        .max_int_value(30),
+                    ),
             ];
 
             info!("registering {} commands", commands.len());
