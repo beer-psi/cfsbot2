@@ -10,7 +10,10 @@ use tracing::{error, info};
 use crate::{
     app_state::AppState,
     errors::log_app_errors,
-    routes::{confession::post_confession, interaction::post_interaction},
+    routes::{
+        confession::post_confession,
+        interaction::{post_interaction, verify_interaction_request},
+    },
 };
 
 mod app_state;
@@ -91,7 +94,13 @@ async fn main() {
         None => {
             let app = Router::new()
                 .route("/confession", post(post_confession))
-                .route("/interaction", post(post_interaction))
+                .route(
+                    "/interaction",
+                    post(post_interaction).layer(axum::middleware::from_fn_with_state(
+                        app_state.clone(),
+                        verify_interaction_request,
+                    )),
+                )
                 .layer(axum::middleware::from_fn(log_app_errors))
                 .layer(TraceLayer::new_for_http())
                 .with_state(app_state.clone());

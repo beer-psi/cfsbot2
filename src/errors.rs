@@ -10,6 +10,9 @@ use axum::{
 #[derive(Debug, thiserror::Error)]
 pub enum InternalError {
     #[error(transparent)]
+    Axum(#[from] axum::Error),
+
+    #[error(transparent)]
     Db(#[from] sqlx::Error),
 
     #[error(transparent)]
