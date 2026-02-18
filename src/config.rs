@@ -14,6 +14,7 @@ pub struct Config {
     pub discord_application_id: ApplicationId,
     pub discord_public_key: String,
 
+    pub confessions_token: String,
     pub confessions_guild_id: GuildId,
     pub confessions_channel_id: ChannelId,
     pub confessions_role_id: RoleId,
@@ -59,6 +60,7 @@ impl Config {
             discord_application_id: required!("DISCORD_APPLICATION_ID", "unsigned 64-bit integer"),
             discord_public_key: required!("DISCORD_PUBLIC_KEY", "public key"),
 
+            confessions_token: required!("CONFESSIONS_TOKEN", "random string"),
             confessions_guild_id: required!("CONFESSIONS_GUILD_ID", "unsigned 64-bit integer"),
             confessions_channel_id: required!("CONFESSIONS_CHANNEL_ID", "unsigned 64-bit integer"),
             confessions_role_id: required!("CONFESSIONS_ROLE_ID", "unsigned 64-bit integer"),

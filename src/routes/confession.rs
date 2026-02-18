@@ -6,6 +6,10 @@ use axum::{
     http::StatusCode,
     response::{IntoResponse, Response},
 };
+use axum_extra::{
+    TypedHeader,
+    headers::{Authorization, authorization::Bearer},
+};
 use serde::Deserialize;
 use serenity::all::{
     ButtonStyle, ChannelId, CreateActionRow, CreateButton, CreateEmbed, CreateMessage, EditMessage,
@@ -100,10 +104,16 @@ async fn post_confession_message(
 
 pub async fn post_confession(
     State(app_state): State<Arc<AppState>>,
+    authorization: Option<TypedHeader<Authorization<Bearer>>>,
     Json(data): Json<ConfessionCreate>,
 ) -> Result<Response, InternalError> {
-    // TODO: security measures (probably a static auth key is good enough)
-    // TODO: insert into database
+    let Some(TypedHeader(Authorization(authorization))) = authorization else {
+        return Ok(StatusCode::UNAUTHORIZED.into_response());
+    };
+
+    if authorization.token() != app_state.config.confessions_token {
+        return Ok(StatusCode::UNAUTHORIZED.into_response());
+    }
 
     // Check if there's already a confession with the provided ID
     let mut txn = app_state.pool.begin().await?;
